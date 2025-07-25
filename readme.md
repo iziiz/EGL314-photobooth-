@@ -136,6 +136,17 @@ The `resource_path()` function **solves this** by returning the correct path whe
 
 - a **regular Python script**, or  
 - a **PyInstaller `.exe`**
+### Function Code
+
+```python
+def resource_path(relative_path):
+    """Returns absolute path to a resource, compatible with PyInstaller."""
+    try:
+        base_path = sys._MEIPASS  # PyInstaller temp directory
+    except Exception:
+        base_path = os.path.abspath(".")  # Normal dev mode
+    return os.path.join(base_path, relative_path)
+```
 <br>
 
 ## Flow of the app
